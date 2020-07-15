@@ -2,7 +2,8 @@ const express = require('express');
 const http = require('http');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const { RSA_PKCS1_OAEP_PADDING } = require('constants');
+
+const dishRouter = require('./routes/dishRouter');
 
 const hostname = 'localhost';
 const port = 4048;
@@ -11,6 +12,8 @@ const app = express();
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 
+app.use('/dishes', dishRouter);
+/*
 app.all('/dishes', (req, res, next) => {
 	res.statusCode = 200;
 	res.setHeader('Content-Type', 'text/plain');
@@ -21,8 +24,8 @@ app.get('/dishes', (req, res, next) => {
 	res.end('will send all the dishes to you!');
 });
 
-app.post('/dishes', (req, res, next) =>{
-	res.end('will add the dish: ' + req.body.name + 'with details: ' + req.body.description);
+app.post('/dish', (req, res, next) =>{
+	res.end('will add the dish: ' + req.body.name + ' with details: ' + req.body.description);
 });
 
 app.put('/dishes', (req, res, next) =>{
@@ -51,7 +54,7 @@ app.put('/dishes/:dishId', (req, res, next) =>{
 app.delete('/dishes/:dishId', (req, res, next) =>{
 	res.end(' Deleting dish! ' + req.params.dishId);
 });
-
+*/
 
 app.use(express.static(__dirname+ '/public'));
 
